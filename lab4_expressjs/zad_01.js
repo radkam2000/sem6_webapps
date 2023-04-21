@@ -3,7 +3,16 @@ const app = express(); //utworzenie obiektu aplikacji express
 const PORT = 3000; //ustawienie portu
 const pack = require("./package.json");
 const path = require("path");
+const bodyParser = require("body-parser");
 // routing:
+
+app.use(bodyParser.json());
+app.use(
+	bodyParser.urlencoded({
+		extended: true,
+	})
+);
+
 app.get("/", function (req, res) {
 	res.send("Szkielet programistyczny Express!");
 });
@@ -20,7 +29,7 @@ app.get("/name/:imie", function (req, res) {
 			"<h1>Cześć " +
 			req.params.imie +
 			"</h1>" +
-			"</body></hhtml>"
+			"</body></html>"
 	);
 });
 
@@ -40,12 +49,21 @@ app.get("/names/:imie&:imie2", function (req, res) {
 
 //Z 1.10
 app.get("/form", (req, res) => {
-	res.sendFile(path.join(__dirname, "form.html"));
+	res.sendFile(path.join(__dirname, "form_01.html"));
 });
-app.get("/result", (req, res) => {
-	let username = req.query.username;
-	let password = req.query.password;
-	res.send("Użytkownik: " + username + "<br>Hasło: " + password);
+
+app.post("/result", (req, res) => {
+	let username = req.body.username;
+	let password = req.body.password;
+	let languages = req.body.language;
+	res.send(
+		"Użytkownik: " +
+			username +
+			"<br>Hasło: " +
+			password +
+			"</br>" +
+			languages
+	);
 });
 
 // inne endpointy
