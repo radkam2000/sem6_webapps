@@ -4,20 +4,50 @@ const PORT = 3000; //ustawienie portu
 const path = require("path");
 const { check, validationResult } = require("express-validator");
 
+const sanitizeValue = (value) => {
+	arrayOfValues = value.split(" ");
+	tmp = "";
+	arrayOfValues.forEach((element) => {
+		tmp += element.charAt(0);
+	});
+	return tmp.toUpperCase();
+};
+
 app.get("/", function (req, res) {
 	res.send("Szkielet programistyczny Express!");
 });
 
 app.get("/form", (req, res) => {
-	res.sendFile(path.join(__dirname, "form_1_11.html"));
+	res.sendFile(path.join(__dirname, "form1_11.html"));
 });
+
+app.use(express.json());
+app.use(
+	express.urlencoded({
+		extended: true,
+	})
+);
 
 app.post(
 	"/form",
 	[
-		check("nazwisko").isLength({ min: 3 }),
-		check("email").isEmail(),
-		check("wiek").isNumeric(),
+		check("nazwisko")
+			.isLength({ min: 3, max: 25 })
+			.isAlpha("pl-PL", { ignore: " " })
+			.trim()
+			.stripLow()
+			.bail()
+			.customSanitizer((value) => {
+				return sanitizeValue(value);
+			}),
+		check("email")
+			.isEmail()
+			.withMessage("Błędny email")
+			.trim()
+			.stripLow()
+			.normalizeEmail()
+			.bail(),
+		check("wiek").isInt({ min: 0, max: 110 }).trim().stripLow().bail(),
 	],
 	(req, res) => {
 		const errors = validationResult(req);

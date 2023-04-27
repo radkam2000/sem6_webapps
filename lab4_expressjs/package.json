@@ -1,20 +1,20 @@
 {
-  "name": "express-serwer",
-  "description": "Prosta aplikacja serwerowa oparta na szkielecie Express",
-  "main": "zad_01.js",
-  "keywords": [
-    "express",
-    "serwer"
-  ],
-  "author": "Jan",
-  "dependencies": {
-    "body-parser": "^1.20.2",
-    "express": "^4.18.2",
-    "express-validator": "^7.0.1",
-    "nodemon": "^2.0.22"
-  },
-  "scripts": {
-    "start": "node zad_01.js",
-    "dev": "nodemon zad_1_11.js"
-  }
+	"name": "express-serwer",
+	"description": "Prosta aplikacja serwerowa oparta na szkielecie Express",
+	"main": "zad_01.js",
+	"keywords": [
+		"express",
+		"serwer"
+	],
+	"author": "Jan",
+	"dependencies": {
+		"body-parser": "^1.20.2",
+		"express": "^4.18.2",
+		"express-validator": "^7.0.1",
+		"nodemon": "^2.0.22"
+	},
+	"scripts": {
+		"start": "node zad_01.js",
+		"dev": "nodemon zad1_12.js"
+	}
 }
