@@ -1,0 +1,17 @@
+{
+	"dependencies": {
+		"@handlebars/allow-prototype-access": "^1.0.5",
+		"express": "^4.18.2",
+		"express-handlebars": "^7.0.7",
+		"handlebars": "^4.7.7",
+		"mongo": "^0.1.0",
+		"mongodb": "^5.3.0",
+		"mongoose": "^7.1.0",
+		"nodemon": "^2.0.22",
+		"path": "^0.12.7"
+	},
+	"scripts": {
+		"start": "node zad_01.js",
+		"dev": "nodemon server.js"
+	}
+}
