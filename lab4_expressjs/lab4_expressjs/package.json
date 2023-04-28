@@ -20,6 +20,6 @@
 	},
 	"scripts": {
 		"start": "node zad_01.js",
-		"dev": "nodemon zad1_12_and_13.js"
+		"dev": "nodemon zad1_16.js"
 	}
 }

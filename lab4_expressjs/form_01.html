@@ -1,17 +1,33 @@
 <html>
 	<body>
-		<form action="/result" method="POST">
+		<form action="/result" method="POST" onsubmit="return validateForm()">
 			<label>Użytkownik: </label><br />
 			<input type="text" name="username" required /> <br />
 			<label>Hasło: </label><br />
 			<input type="password" name="password" required /> <br />
 			<label>Rosyjski</label>
-			<input type="checkbox" name="language" value="Rosyjski">
+			<input type="checkbox" name="language" value="Rosyjski" />
 			<label>Niemiecki</label>
-			<input type="checkbox" name="language" value="Niemiecki">
+			<input type="checkbox" name="language" value="Niemiecki" />
 			<label>Angielski</label>
-			<input type="checkbox" name="language" value="Angielski">
+			<input type="checkbox" name="language" value="Angielski" />
 			<input type="submit" name="submit" value="Wyślij POST" />
 		</form>
+		<script>
+			function validateForm() {
+				var checkboxes = document.getElementsByName("language");
+				var checked = false;
+				for (var i = 0; i < checkboxes.length; i++) {
+					if (checkboxes[i].checked) {
+						checked = true;
+						break;
+					}
+				}
+				if (!checked) {
+					alert("Please select at least one language.");
+					return false;
+				}
+			}
+		</script>
 	</body>
 </html>
