@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Student = require("../models/Student");
+const { check, validationResult } = require("express-validator");
 
 router.get("/", (req, res) => {
 	res.send(`
@@ -24,13 +25,33 @@ router.get("/addOrEdit", (req, res) => {
 		viewTitle: "Dodaj studenta",
 	});
 });
-router.post("/", (req, res) => {
-	if (req.body._id == "") {
-		insert(req, res);
-	} else {
-		update(req, res);
+router.post(
+	"/",
+	[
+		check("fullName")
+			.isLength({ min: 2, max: 25 })
+			.isAlpha("pl-PL", { ignore: " " }),
+		check("email").isEmail(),
+		check("mobile").isNumeric(),
+		check("city")
+			.isLength({ min: 2, max: 25 })
+			.isAlpha("pl-PL", { ignore: " " }),
+	],
+	(req, res) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			console.log("Error: nie mozna dodac uzytwkoniwka");
+			res.status(422);
+			res.redirect("/list");
+			return;
+		}
+		if (req.body._id == "") {
+			insert(req, res);
+		} else {
+			update(req, res);
+		}
 	}
-});
+);
 router.get("/:id", (req, res) => {
 	Student.findById(req.params.id)
 		.then((doc) => {

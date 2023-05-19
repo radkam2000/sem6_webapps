@@ -1,10 +1,7 @@
 const mongoose = require("mongoose");
 
 mongoose
-	.connect(
-		"mongodb+srv://s00000:<s00000>@cluster0.qshd63v.mongodb.net/?retryWrites=true&w=majority",
-		{ useNewUrlParser: true }
-	)
+	.connect("mongodb://127.0.0.1:27017/StudentDB", { useNewUrlParser: true })
 	.then((result) => {
 		console.log("Połączono z bazą");
 	})
