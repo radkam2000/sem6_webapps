@@ -17,7 +17,7 @@ const Signup = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const url = "http://localhost:8080/api/users";
+			const url = "http://localhost:5000/api/users";
 			const { data: res } = await axios.post(url, data);
 			navigate("/login");
 			console.log(res.message);
@@ -45,7 +45,8 @@ const Signup = () => {
 				<div className={styles.right}>
 					<form
 						className={styles.form_container}
-						onSubmit={handleSubmit}>
+						onSubmit={handleSubmit}
+					>
 						<h1>Create Account</h1>
 						<input
 							type="text"
